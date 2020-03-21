@@ -7,8 +7,9 @@ class Pet
 {
     constructor()
     {
+
         this.
-        this.image
+        this.image = 'assets/baby.png'
         this.pos = [canvas.width / 2, canvas.height - this.size[1] - 5]
         this.lastPoop = Date.now();
         this.lastFeed = Date.now();

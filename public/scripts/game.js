@@ -6,7 +6,19 @@ const ctx = canvas.getContext("2d");
 var pet = new Pet();
 
 // Game start
-init();
+
+resources.load([
+    'img/adult.png',
+    'img/baby.png',
+    'img/teen.png',
+    'img/ball.png',
+    'img/food.png',
+    'img/gravestone.png',
+    'img/heart.png',
+    'img/poop.png',
+    'img/scoop.png',
+]);
+resources.onReady(init);
 
 // Setup
 function init()
