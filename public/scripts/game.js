@@ -4,9 +4,10 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 var pet = new Pet();
+var tool = new Tool();
+var dung = [];
 
-// Game start
-
+// Load resources and start game
 resources.load([
     'img/adult.png',
     'img/baby.png',
@@ -44,12 +45,30 @@ function update()
     // Update the time.
     gameTime += Date.now();
 
+    pet.update();
+    tool.update();
+
+    for (var i = 0; i < dung.length; i++)
+    {
+        dung[i].update();
+    }
 }
 
 // Draw
 function draw()
 {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pet.draw();
+    tool.update();
 
-    //pet.draw();
+    for (var i = 0; i < dung.length; i++)
+    {
+        dung[i].draw();
+    }
+}
+
+// Random int.
+function getRandInt(min, max)
+{
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
