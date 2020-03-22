@@ -65,6 +65,7 @@ class Pet
 
         if (this.pos[axis] > this.targetPos[axis])
         {
+            // Check if the difference is greater than the speed
             if (this.speed > dif)
             {
                 this.pos[axis] -= this.speed;
@@ -76,6 +77,7 @@ class Pet
         }
         else if (this.pos[axis] < this.targetPos[axis])
         {
+            // Check if the difference is greater than the speed
             if (this.speed > dif)
             {
                 this.pos[axis] += this.speed;
