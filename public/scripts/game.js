@@ -3,9 +3,11 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-var pet = new Pet();
-var tool = new Tool();
+var pet;
+var player = new Player();
 var dung = [];
+
+var isGameOver = false;
 
 // Load resources and start game
 resources.load([
@@ -24,6 +26,8 @@ resources.onReady(init);
 // Setup
 function init()
 {
+    //background = ctx.drawImage(resources.get('assets/Background.png'));
+
     reset();
     lastTime = Date.now();
     main();
@@ -32,7 +36,10 @@ function init()
 // Main loop
 function main()
 {
-    update();
+    let now = Date.now();
+    let dt = (now - lastTime) / 1000.0
+
+    update(dt);
     draw();
 
     requestAnimationFrame(main);
@@ -40,13 +47,13 @@ function main()
 
 
 // Update
-function update()
+function update(time)
 {
     // Update the time.
-    gameTime += Date.now();
+    gameTime += dt;
 
-    pet.update();
-    tool.update();
+    petControl.update(dt);
+    player.update(dt);
 
     for (var i = 0; i < dung.length; i++)
     {
@@ -58,17 +65,56 @@ function update()
 function draw()
 {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    pet.draw();
-    tool.update();
+    renderer.draw(pet);
+    renderer.draw(player);
 
     for (var i = 0; i < dung.length; i++)
     {
-        dung[i].draw();
+        renderer.draw(dung[i]);
     }
+}
+
+function reset()
+{
+    pet = new Pet();
+}
+
+// Game over
+function gameOver()
+{
+    document.getElementById('game-over').style.display = 'block';
+    document.getElementById('game-over-overlay').style.display = 'block';
+    isGameOver = true;
 }
 
 // Random int.
 function getRandInt(min, max)
 {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Hnadle key input
+function handleInput(dt)
+{
+    if (input.isDown('DOWN') || input.isDown('s'))
+    {
+    }
+
+    if (input.isDown('UP') || input.isDown('w'))
+    {
+    }
+
+    if (input.isDown('LEFT') || input.isDown('a'))
+    {
+    }
+
+    if (input.isDown('RIGHT') || input.isDown('d'))
+    {
+    }
+
+    if (input.isDown('SPACE') &&
+        !isGameOver &&
+        Date.now() - lastFire > 100)
+    {
+    }
 }

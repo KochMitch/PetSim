@@ -2,11 +2,22 @@
 
 class Sprite
 {
-    constructor(url, pos, size)
+    constructor(frames, pos, size)
     {
-        this.image = url
+        this.frames = frames
+        this.currFrame = frames[0]
         this.pos = pos
         this.size = size
+    }
+
+    get image()
+    {
+        return this.currFrame;
+    }
+
+    set image(newImage)
+    {
+        this.currFrame = newImage;
     }
 
     update()
